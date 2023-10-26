@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const likes_validators_1 = require("../validators/likes.validators");
+const likes_controller_1 = require("../controllers/likes.controller");
+const router = (0, express_1.Router)();
+router.post("/create", [auth_middleware_1.verifyToken, likes_validators_1.validateCreateLikeInfo], likes_controller_1.createLike);
+router.get("/get-all-likes-post", likes_validators_1.validateGetAllLikesPostInfo, likes_controller_1.getAllLikesPost);
+router.delete("/delete", [auth_middleware_1.verifyToken, likes_validators_1.validateDeleteLikeInfo], likes_controller_1.deleteLike);
+exports.default = router;

@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const block_validators_1 = require("../validators/block.validators");
+const block_controller_1 = require("../controllers/block.controller");
+const router = (0, express_1.Router)();
+router.post("/block-user", [auth_middleware_1.verifyToken, block_validators_1.validateBlockUser], block_controller_1.blockUser);
+router.delete("/unblock-user", [auth_middleware_1.verifyToken, block_validators_1.validateUnblockUser], block_controller_1.unblockUser);
+exports.default = router;
